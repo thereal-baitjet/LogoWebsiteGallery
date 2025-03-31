@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logo Inspiration Gallery</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1><a href="/">Logo Inspiration Gallery</a></h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/logos">Browse Logos</a></li>
+          <li><a href="/logos/upload">Upload Logo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="content">
+      <%- body %>
+    </div>
+    
+    <aside class="ad-panel">
+      <h3>Sponsored</h3>
+      <div class="ad-container">
+        <!-- Ad content will go here -->
+        <div class="ad-placeholder">
+          <p>Advertisement</p>
+        </div>
+        <div class="ad-placeholder">
+          <p>Advertisement</p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <%= new Date().getFullYear() %> Logo Inspiration Gallery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

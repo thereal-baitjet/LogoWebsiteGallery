@@ -1,0 +1,45 @@
+<%- include('layout', { body: `
+    <section class="logos-header">
+      <h2>Logo Gallery</h2>
+      
+      <div class="search-container">
+        <form action="/logos/search" method="GET" class="search-form">
+          <input type="text" name="q" placeholder="Search logos..." value="${searchTerm || ''}">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+      </div>
+    </section>
+    
+    <section class="logo-grid">
+      <% if (logos && logos.length > 0) { %>
+        <% logos.forEach(logo => { %>
+          <div class="logo-card">
+            <a href="/logos/<%= logo._id %>">
+              <div class="logo-image">
+                <img src="<%= logo.path %>" alt="<%= logo.title %>">
+              </div>
+              <div class="logo-info">
+                <h3><%= logo.title %></h3>
+                <p class="logo-tags">
+                  <% if (logo.tags && logo.tags.length > 0) { %>
+                    <% logo.tags.forEach(tag => { %>
+                      <span class="tag"><%= tag %></span>
+                    <% }) %>
+                  <% } %>
+                </p>
+              </div>
+            </a>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="no-results">
+          <p>No logos found. Be the first to <a href="/logos/upload">upload a logo</a>!</p>
+        </div>
+      <% } %>
+    </section>
+    
+    <div class="pagination">
+      <!-- Pagination will go here when implemented -->
+    </div>
+    ` }) %>
+    
