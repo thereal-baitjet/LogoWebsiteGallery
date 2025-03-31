@@ -1,0 +1,88 @@
+cat > views/logo-detail.ejs << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= logo.title %> - Logo Inspiration Gallery</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1><a href="/">Logo Inspiration Gallery</a></h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/logos">Browse Logos</a></li>
+          <li><a href="/logos/upload">Upload Logo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="content">
+      <section class="logo-detail">
+        <div class="logo-detail-image">
+          <img src="<%= logo.path %>" alt="<%= logo.title %>">
+        </div>
+        
+        <div class="logo-detail-info">
+          <h2><%= logo.title %></h2>
+          
+          <% if (logo.description) { %>
+            <div class="logo-description">
+              <h3>Description</h3>
+              <p><%= logo.description %></p>
+            </div>
+          <% } %>
+          
+          <div class="logo-meta">
+            <p>Uploaded by: <strong><%= logo.uploadedBy %></strong></p>
+            <p>Date: <strong><%= new Date(logo.uploadDate).toLocaleDateString() %></strong></p>
+          </div>
+          
+          <% if (logo.tags && logo.tags.length > 0) { %>
+            <div class="logo-tags">
+              <h3>Tags</h3>
+              <div class="tags-container">
+                <% logo.tags.forEach(tag => { %>
+                  <a href="/logos/search?q=<%= tag %>" class="tag"><%= tag %></a>
+                <% }) %>
+              </div>
+            </div>
+          <% } %>
+          
+          <div class="logo-actions">
+            <a href="/logos" class="btn btn-secondary">Back to Gallery</a>
+            <!-- Download functionality could be added here -->
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <aside class="ad-panel">
+      <h3>Sponsored</h3>
+      <div class="ad-container">
+        <!-- Ad content will go here -->
+        <div class="ad-placeholder">
+          <p>Advertisement</p>
+        </div>
+        <div class="ad-placeholder">
+          <p>Advertisement</p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <%= new Date().getFullYear() %> Logo Inspiration Gallery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
+EOF

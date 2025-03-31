@@ -1,0 +1,89 @@
+cat > views/logos.ejs << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Logos - Logo Inspiration Gallery</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1><a href="/">Logo Inspiration Gallery</a></h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/logos">Browse Logos</a></li>
+          <li><a href="/logos/upload">Upload Logo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="content">
+      <section class="logos-header">
+        <h2>Logo Gallery</h2>
+        
+        <div class="search-container">
+          <form action="/logos/search" method="GET" class="search-form">
+            <input type="text" name="q" placeholder="Search logos..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="logo-grid">
+        <% if (typeof logos !== 'undefined' && logos && logos.length > 0) { %>
+          <% logos.forEach(logo => { %>
+            <div class="logo-card">
+              <a href="/logos/<%= logo._id %>">
+                <div class="logo-image">
+                  <img src="<%= logo.path %>" alt="<%= logo.title %>">
+                </div>
+                <div class="logo-info">
+                  <h3><%= logo.title %></h3>
+                  <p class="logo-tags">
+                    <% if (logo.tags && logo.tags.length > 0) { %>
+                      <% logo.tags.forEach(tag => { %>
+                        <span class="tag"><%= tag %></span>
+                      <% }) %>
+                    <% } %>
+                  </p>
+                </div>
+              </a>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <div class="no-results">
+            <p>No logos found. Be the first to <a href="/logos/upload">upload a logo</a>!</p>
+          </div>
+        <% } %>
+      </section>
+    </div>
+    
+    <aside class="ad-panel">
+      <h3>Sponsored</h3>
+      <div class="ad-container">
+        <!-- Ad content will go here -->
+        <div class="ad-placeholder">
+          <p>Advertisement</p>
+        </div>
+        <div class="ad-placeholder">
+          <p>Advertisement</p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <%= new Date().getFullYear() %> Logo Inspiration Gallery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
+EOF
